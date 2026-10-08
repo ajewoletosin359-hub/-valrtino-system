@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VALRTINO Milestone 1 Plan</title>
+<style>
+  :root { --ink:#101a2e; --ink2:#22304d; --gold:#b8922e; --gold-soft:#f6efdc; --line:#dfe3ea; --mute:#5c6678; --paper:#fbfaf6; }
+  @page { size: A4; margin: 20mm 16mm 19mm 16mm;
+    @bottom-left { content: "VALRTINO  |  Milestone 1 Plan"; font-family: "Segoe UI", Arial, sans-serif; font-size: 8pt; color: #8a93a3; letter-spacing: .6pt; }
+    @bottom-right { content: counter(page); font-family: "Segoe UI", Arial, sans-serif; font-size: 8.5pt; color: #101a2e; font-weight: 600; } }
+  @page cover { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; color: #1d2433; margin: 0; }
+
+  .cover { page: cover; height: 297mm; background: var(--ink); color: #fff; padding: 46mm 24mm 24mm; position: relative; break-after: page; overflow: hidden; }
+  .cover:before { content: ""; position: absolute; right: -60mm; top: -60mm; width: 190mm; height: 190mm; border: 1px solid rgba(184,146,46,.35); border-radius: 50%; }
+  .cover:after { content: ""; position: absolute; right: -30mm; top: -30mm; width: 130mm; height: 130mm; border: 1px solid rgba(184,146,46,.2); border-radius: 50%; }
+  .cover .brand { font-family: Georgia, "Times New Roman", serif; font-size: 46pt; letter-spacing: 9pt; font-weight: 400; }
+  .cover .rule { width: 34mm; height: 2.5pt; background: var(--gold); margin: 10mm 0 12mm; }
+  .cover .kicker { font-size: 9.5pt; letter-spacing: 3pt; text-transform: uppercase; color: var(--gold); margin-bottom: 5mm; }
+  .cover .title { font-family: Georgia, "Times New Roman", serif; font-size: 27pt; line-height: 1.25; }
+  .cover .sub { font-size: 12pt; color: #c5cbd8; margin-top: 6mm; }
+  .cover .meta { position: absolute; left: 24mm; right: 24mm; bottom: 26mm; display: flex; gap: 10mm; border-top: 1px solid rgba(255,255,255,.18); padding-top: 7mm; font-size: 10.5pt; }
+  .cover .meta div { flex: 1; }
+  .cover .meta span { display: block; font-size: 7.5pt; letter-spacing: 1.6pt; text-transform: uppercase; color: var(--gold); margin-bottom: 2pt; }
+
+  h2 { display: flex; align-items: baseline; gap: 9pt; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 19pt; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 6pt; margin: 24pt 0 11pt; break-after: avoid; }
+  h2 .num { font-family: "Segoe UI", Arial, sans-serif; font-size: 10pt; font-weight: 700; color: #fff; background: var(--gold); border-radius: 3pt; padding: 2pt 7pt; position: relative; top: -3pt; }
+  h3 { font-size: 11pt; font-weight: 700; color: var(--ink); margin: 15pt 0 5pt; break-after: avoid; }
+  p { margin: 0 0 7pt; }
+  ul { margin: 0 0 8pt; padding-left: 15pt; }
+  ul li { margin-bottom: 3pt; }
+  ul li::marker { color: var(--gold); }
+  ol { margin: 4pt 0 9pt; padding-left: 0; list-style: none; counter-reset: s; }
+  ol > li { counter-increment: s; position: relative; padding-left: 22pt; margin-bottom: 4.5pt; }
+  ol > li:before { content: counter(s); position: absolute; left: 0; top: 1pt; width: 14.5pt; height: 14.5pt; border-radius: 50%; background: var(--ink); color: #fff; font-size: 8pt; font-weight: 700; text-align: center; line-height: 14.5pt; }
+
+  table { width: 100%; border-collapse: collapse; margin: 7pt 0 12pt; font-size: 9pt; }
+  th { background: var(--ink); color: #fff; text-align: left; padding: 6pt 7pt; font-weight: 600; font-size: 7.8pt; letter-spacing: .7pt; text-transform: uppercase; vertical-align: bottom; }
+  th:first-child { border-radius: 3pt 0 0 0; } th:last-child { border-radius: 0 3pt 0 0; }
+  td { border-bottom: 1px solid var(--line); padding: 5.5pt 7pt; vertical-align: top; }
+  tr { break-inside: avoid; }
+  tr:nth-child(even) td { background: var(--paper); }
+  td:first-child { font-weight: 600; color: var(--ink); }
+  .grp td { background: var(--gold-soft) !important; color: #7a5d12; font-weight: 700; font-size: 8pt; letter-spacing: 1pt; text-transform: uppercase; border-bottom: 1.5px solid var(--gold); padding-top: 7pt; }
+
+  .box { border-left: 3.5pt solid var(--gold); background: var(--gold-soft); border-radius: 0 4pt 4pt 0; padding: 9pt 12pt; margin: 9pt 0 12pt; break-inside: avoid; }
+  .box ol { margin-bottom: 0; } .box ol > li:before { background: var(--gold); }
+  .note { color: var(--mute); font-size: 9.2pt; }
+  .pb { break-before: page; }
+  code { font-family: Consolas, monospace; font-size: 9.3pt; background: #eceff4; color: var(--ink); padding: 1pt 4pt; border-radius: 2.5pt; }
+
+  .tiles { display: flex; gap: 8pt; margin: 12pt 0 14pt; break-inside: avoid; }
+  .tile { flex: 1; background: var(--ink); color: #fff; border-radius: 5pt; padding: 11pt 11pt 10pt; border-bottom: 3pt solid var(--gold); }
+  .tile b { display: block; font-family: Georgia, serif; font-weight: 400; font-size: 22pt; line-height: 1.1; }
+  .tile span { display: block; font-size: 8.3pt; color: #c5cbd8; margin-top: 4pt; line-height: 1.35; }
+
+  .toc { columns: 2; column-gap: 14pt; }
+  .toc li { break-inside: avoid; }
+
+  .agents { display: grid; grid-template-columns: 1fr 1fr; gap: 7pt; margin: 8pt 0 12pt; }
+  .agent { border: 1px solid var(--line); border-left: 3pt solid var(--gold); border-radius: 4pt; padding: 7pt 9pt; break-inside: avoid; background: #fff; }
+  .agent .top { display: flex; align-items: baseline; gap: 6pt; }
+  .agent .nm { font-family: Georgia, serif; font-size: 13pt; color: var(--ink); }
+  .agent .rl { font-size: 7.8pt; letter-spacing: .9pt; text-transform: uppercase; color: var(--gold); font-weight: 700; flex: 1; }
+  .agent .ms { font-size: 7.5pt; font-weight: 700; color: #fff; background: var(--ink); border-radius: 9pt; padding: 1.5pt 7pt; white-space: nowrap; }
+  .agent p { margin: 3pt 0 0; font-size: 8.9pt; color: #3a4354; line-height: 1.4; }
+
+  .diagram { display: flex; align-items: stretch; gap: 5pt; margin: 9pt 0 12pt; font-size: 8.6pt; break-inside: avoid; }
+  .diagram .col { flex: 1; border: 1px solid var(--line); border-top: 3pt solid var(--ink); border-radius: 4pt; padding: 7pt; background: var(--paper); line-height: 1.4; }
+  .diagram .col b { display: block; color: var(--ink); margin-bottom: 3pt; font-size: 9.5pt; }
+  .diagram .arrow { align-self: center; font-size: 13pt; color: var(--gold); }
+  .flow { display: block; background: var(--ink); color: #fff; border-radius: 4pt; font-weight: 600; font-size: 9pt; letter-spacing: .6pt; text-align: center; padding: 7pt 6pt; margin: 7pt 0 10pt; break-inside: avoid; }
+
+  .timeline { display: flex; gap: 3pt; margin: 10pt 0 4pt; break-inside: avoid; }
+  .seg { color: #fff; background: var(--ink); border-radius: 3pt; padding: 7pt 6pt; min-width: 0; }
+  .seg:nth-child(even) { background: var(--gold); }
+  .seg b { display: block; font-family: Georgia, serif; font-weight: 400; font-size: 14pt; line-height: 1; }
+  .seg span { display: block; font-size: 7.3pt; margin-top: 3pt; line-height: 1.25; }
+  .tl-note { font-size: 8.3pt; color: var(--mute); margin-bottom: 10pt; }
+
+  .chart { margin: 8pt 0 12pt; break-inside: avoid; }
+  .chart .ttl { font-size: 7.8pt; letter-spacing: .9pt; text-transform: uppercase; color: var(--mute); font-weight: 700; margin-bottom: 5pt; }
+  .bar { display: flex; align-items: center; gap: 7pt; margin-bottom: 3.5pt; font-size: 8.8pt; }
+  .bar .lb { width: 31mm; color: var(--ink); font-weight: 600; }
+  .bar .tr { flex: 1; background: #eceff4; border-radius: 2pt; height: 9pt; }
+  .bar .fl { background: var(--ink); height: 9pt; border-radius: 2pt; }
+  .bar .vl { width: 26mm; color: var(--mute); }
+
+  .recs { display: flex; gap: 7pt; margin: 8pt 0 10pt; break-inside: avoid; }
+  .rec { flex: 1; border: 1px solid var(--line); border-top: 3pt solid var(--gold); border-radius: 4pt; padding: 8pt 9pt; font-size: 8.9pt; line-height: 1.4; }
+  .rec i { display: block; font-style: normal; font-size: 7.5pt; letter-spacing: 1pt; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .rec b { display: block; font-family: Georgia, serif; font-weight: 400; font-size: 13pt; color: var(--ink); margin: 1pt 0 3pt; }
+  table:not(.long) { break-inside: avoid; }
+  h3 + p, h3 + ol, h3 + ul { break-before: avoid; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="brand">VALRTINO</div>
+  <div class="rule"></div>
+  <div class="kicker">Milestone 1 plan</div>
+  <div class="title">Discovery &amp;<br>Foundation</div>
+  <div class="sub">AI Multi-Agent E-commerce System</div>
+  <div class="meta">
+    <div><span>Prepared for</span>Yosef</div>
+    <div><span>Prepared by</span>Pelu</div>
+    <div><span>Date</span>October 2026</div>
+    <div><span>Version</span>1, for review and approval</div>
+  </div>
+</div>
+
+<h2>How to use this document</h2>
+<p>This is the Milestone 1 plan. It covers everything agreed in your brief, your three requirements documents, the Fiverr messages and the accepted offer. Three things are needed from you:</p>
+<ol>
+  <li><b>Complete the setup steps in Part 1</b> so the system can be built inside your own accounts.</li>
+  <li><b>Choose the starting market (Part 8) and the supplier (Part 9).</b> My recommendations are given, and the final choice is yours.</li>
+  <li><b>Approve this plan in writing</b>, or send the changes you want.</li>
+</ol>
+<div class="box">Nothing in this document is purchased, published, launched or changed until you approve it. No campaigns and no advertising spend happen in Milestone 1.</div>
+
+<div class="tiles">
+  <div class="tile"><b>$3,600</b><span>fixed price, in six payments of $600</span></div>
+  <div class="tile"><b>6</b><span>milestones, each tested and approved before the next</span></div>
+  <div class="tile"><b>14</b><span>named agents, led by James</span></div>
+  <div class="tile"><b>103</b><span>days of delivery in total</span></div>
+</div>
+<h3>Contents</h3>
+<ol class="toc">
+  <li>Account setup and access</li>
+  <li>Confirmations</li>
+  <li>The 14 agents</li>
+  <li>Architecture and technical plan</li>
+  <li>The six milestones and how each is accepted</li>
+  <li>Requirements register</li>
+  <li>Third-party components, licences and recurring costs</li>
+  <li>Market comparison</li>
+  <li>Supplier and fulfillment comparison</li>
+  <li>Not included, limitations and approval</li>
+</ol>
+
+<h2 class="pb"><span class="num">1</span>Account setup and access</h2>
+<p>Every account is created by you, in your name, with you as owner and administrator. I am invited as a collaborator and you can remove my access at any time. Please never send a password; every step below works by invitation.</p>
+
+<h3>1.1 GitHub (free)</h3>
+<ol>
+  <li>Sign up at github.com with your own email.</li>
+  <li>Turn on two-factor authentication under Settings &gt; Password and authentication.</li>
+  <li>Create a private repository named <code>valrtino-system</code>.</li>
+  <li>In the repository go to Settings &gt; Collaborators &gt; Add people and invite <code>ajewoletosin359-hub</code>.</li>
+</ol>
+<p>All code is written into this repository from the first commit. It never sits in an account of mine.</p>
+
+<h3>1.2 VPS server (paid, needs your approval)</h3>
+<p>Recommended provider: Hetzner Cloud. Recommended plan: CX23 with 2 vCPU, 4 GB RAM, 40 GB SSD, running Ubuntu 24.04. Published price is about EUR 6 per month including the IP address, before any tax. The price shown to you at checkout is the final one. This server runs the dashboard, the database and n8n, and can be upgraded later without rebuilding.</p>
+<ol>
+  <li>Create an account at hetzner.com/cloud in your name, with your own payment method.</li>
+  <li>Complete the identity check if Hetzner asks for one.</li>
+  <li>Create a project named VALRTINO.</li>
+  <li>In the project go to Security &gt; Members and invite <code>ajewoletosin359@gmail.com</code>.</li>
+  <li>Do not create the server yet. I will send the exact configuration and the checkout price for your approval, then create it inside your project.</li>
+</ol>
+
+<h3>1.3 Dashboard address (free)</h3>
+<p>The dashboard needs a secure web address. I suggest <code>app.valrtino.com</code>. It needs one DNS record at the provider where valrtino.com is registered. I will send you the exact record once the server exists. It does not affect your store or your email.</p>
+
+<h3>1.4 Shopify (collaborator access)</h3>
+<ol>
+  <li>In your Shopify admin go to Settings &gt; Users &gt; Security and copy the 4-digit collaborator request code.</li>
+  <li>Send me that code and your store's myshopify.com address.</li>
+  <li>I send the collaborator request, and you approve it under Settings &gt; Users.</li>
+</ol>
+<p><b>Permissions needed:</b> Products, Orders, Customers, Analytics and reports, Markets and shipping settings, and Apps (manage and install apps, develop apps) so the system can connect through the Shopify API.<br>
+<b>Not needed:</b> payments, payouts, billing or store ownership settings. Your PayPlus and PayPal setup is not touched.</p>
+
+<h3>1.5 Meta (Facebook and Instagram)</h3>
+<ol>
+  <li>Open Meta Business Settings &gt; Users &gt; People &gt; Invite people.</li>
+  <li>Invite <code>ajewoletosin359@gmail.com</code> with basic (employee) access.</li>
+  <li>Assign these assets: your ad account (Manage campaigns), your Facebook Page and Instagram account (create ads), and your Pixel/dataset (view and use).</li>
+</ol>
+<p>In Milestone 1 this access is used only to review your setup. Nothing is created or launched.</p>
+
+<h3>1.6 Accounts needed later</h3>
+<p>These are not needed now. I will send the steps at the start of the milestone that uses them, each in your name.</p>
+<table>
+  <tr><th>Account</th><th>Needed from</th><th>Cost</th></tr>
+  <tr><td>Anthropic (Claude API key)</td><td>Milestone 2</td><td>Usage-based, estimated $20-60 per month</td></tr>
+  <tr><td>TikTok Ads and TikTok developer access</td><td>Milestone 4</td><td>Free to create; ad spend separate</td></tr>
+  <tr><td>Supplier / fulfillment account (see Part 9)</td><td>Milestone 5</td><td>Depends on the service you choose</td></tr>
+  <tr><td>Speech services for voice</td><td>Milestone 6</td><td>Usage-based, estimated $20-50 per month</td></tr>
+</table>
+
+<h3>1.7 One question</h3>
+<p>How would you like to receive alerts (approvals waiting, Stop-Loss pauses, errors): by email or by Telegram? Both are free. Alerts always also appear in the dashboard.</p>
+
+<h2><span class="num">2</span>Confirmations</h2>
+<ul>
+  <li><b>Ownership.</b> All custom code written for this system belongs exclusively to you. I will not sell, share, license or reuse it for another client without your written permission.</li>
+  <li><b>Your accounts.</b> The repository, server, database, n8n, API accounts and keys are created under your ownership, with you as administrator from the first day.</li>
+  <li><b>No lock-in.</b> After every paid milestone the completed work stays in your accounts and is usable by another developer. Documentation is updated at every milestone.</li>
+  <li><b>Modular.</b> Agents can be added, replaced or switched off without breaking the rest of the system (see 4.4).</li>
+  <li><b>Approval.</b> Publishing, launching campaigns, changing budgets, placing orders, refunds, cancellations and any spending require your approval. The only automatic action is a Stop-Loss pause inside limits you approve in advance for each test.</li>
+  <li><b>Purchases.</b> No paid service is bought or subscribed to without your approval.</li>
+  <li><b>Languages.</b> Text chat, recorded voice input and spoken replies support Hebrew and English, on iPhone and computer, with routing by agent name (Milestone 6).</li>
+  <li><b>Price.</b> $3,600 in six separate milestones of $600. Each next milestone starts only after delivery, testing together, correction of any defect, and your approval.</li>
+</ul>
+
+<h2><span class="num">3</span>The 14 agents</h2>
+<div class="agents">
+  <div class="agent"><div class="top"><span class="nm">James</span><span class="rl">CEO</span><span class="ms">Milestone 3</span></div><p>Collects results from all agents, sends the daily and weekly management report, answers when no agent is named in chat.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Nova</span><span class="rl">Product Research</span><span class="ms">Milestone 2</span></div><p>Finds product opportunities from the agreed sources and screens out branded, trademarked, counterfeit and IP-risk items.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Sage</span><span class="rl">Scoring</span><span class="ms">Milestone 2</span></div><p>Scores each product with a visible, configurable formula and ranks markets.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Atlas</span><span class="rl">Shopify Upload</span><span class="ms">Milestone 2</span></div><p>Creates Shopify draft products: titles, descriptions, SEO, variants, pricing, tags, collections.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Muse</span><span class="rl">Creative</span><span class="ms">Milestone 2</span></div><p>Produces ad images, hooks, headlines, copy, video scripts, UGC concepts and variations.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Ada</span><span class="rl">Analytics</span><span class="ms">Milestone 3</span></div><p>Tracks the funnel, ad metrics, revenue and net profit by product, campaign and market.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Leo</span><span class="rl">Scaling</span><span class="ms">Milestone 3</span></div><p>Recommends increase, reduce, pause, duplicate or stop, under the Scaling Playbook.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Cora</span><span class="rl">Customer Service</span><span class="ms">Milestone 3</span></div><p>Answers product, shipping and order questions, escalates unusual cases, never takes financial action without approval.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Max</span><span class="rl">Meta Ads</span><span class="ms">Milestone 4</span></div><p>Prepares Facebook and Instagram campaigns, always created paused.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Tia</span><span class="rl">TikTok Ads</span><span class="ms">Milestone 4</span></div><p>Prepares TikTok campaigns, always created paused.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Remy</span><span class="rl">CRO</span><span class="ms">Milestone 5</span></div><p>Finds where shoppers drop off and recommends page, offer and order-value improvements.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Sam</span><span class="rl">Supplier Monitoring</span><span class="ms">Milestone 5</span></div><p>Checks the chosen supplier's stock, prices and shipping, and raises alerts.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Oscar</span><span class="rl">Order &amp; Shipping</span><span class="ms">Milestone 5</span></div><p>Submits orders to the chosen fulfillment service inside approved limits and syncs tracking.</p></div>
+  <div class="agent"><div class="top"><span class="nm">Finn</span><span class="rl">Learning Supervisor</span><span class="ms">Milestone 6</span></div><p>Scores every agent, tracks lessons, and flags agents that perform poorly.</p></div>
+</div>
+
+<h2 class="pb"><span class="num">4</span>Architecture and technical plan</h2>
+
+<h3>4.1 Overview</h3>
+<div class="diagram">
+  <div class="col"><b>You</b>Computer and iPhone, through a secure web address. Later installable as a web app.</div>
+  <div class="arrow">&harr;</div>
+  <div class="col"><b>Dashboard</b>Next.js application (Node.js). Login, approvals, settings, reports, chat. Owns every approval decision.</div>
+  <div class="arrow">&harr;</div>
+  <div class="col"><b>Database</b>PostgreSQL. Stores products, tests, approvals, audit log, rules, prompts, results and lessons.</div>
+  <div class="arrow">&harr;</div>
+  <div class="col"><b>Agents</b>n8n workflows using the Claude API. One workflow group per agent.</div>
+  <div class="arrow">&harr;</div>
+  <div class="col"><b>External services</b>Shopify, Meta, TikTok, supplier, Claude API, speech services.</div>
+</div>
+<p>Everything except the external services runs on one VPS in your account, started with Docker Compose. The server can be moved to another provider by copying the repository, the database backup and the configuration file.</p>
+
+<h3>4.2 Why n8n together with custom code</h3>
+<ul>
+  <li><b>n8n for the agents.</b> Each agent's steps are visible as a diagram, can be edited without a programmer for simple changes, and can be exported as files. This keeps the agents easy to maintain and replace.</li>
+  <li><b>Custom code for control.</b> Login, approvals, the audit log, business rules, the STOP switch and the reports are safety-critical. They are written as tested code so that an agent cannot bypass them.</li>
+</ul>
+
+<h3>4.3 Approval flow</h3>
+<p class="flow">RECOMMENDED &rarr; WAITING FOR APPROVAL &rarr; APPROVED / REJECTED &rarr; EXECUTED &rarr; RESULT</p>
+<ol>
+  <li>An agent proposes an action. It is saved with its reason and the data used.</li>
+  <li>The dashboard shows it in the approval queue and sends you an alert.</li>
+  <li>You approve or reject. The decision is recorded with your user and the time.</li>
+  <li>Only an approved action receives a one-time execution permission. The agent must present it to act, and it cannot be used twice.</li>
+  <li>The outcome is written back as the result and feeds the agent's history.</li>
+</ol>
+<p>Agents hold no ability to act on their own. Every external change passes through this gate, and the audit log shows what was recommended, what you approved and what was executed.</p>
+
+<h3>4.4 Modularity</h3>
+<p>Each agent is a separate unit made of: its n8n workflows, its prompts, its settings, and one entry in the agent list in the database. Agents talk to the rest of the system only through the dashboard's interface, never directly to each other. To add an agent, a developer adds a new entry and its workflows. To replace or switch one off, its entry is changed. The other agents continue to run. The handover documentation includes a step-by-step guide named "How to add a new agent".</p>
+
+<h3>4.5 Data model (main tables)</h3>
+<table>
+  <tr><th style="width:26%">Table</th><th>Holds</th></tr>
+  <tr><td>users, sessions</td><td>Login accounts, roles and sessions.</td></tr>
+  <tr><td>agents</td><td>The agent list: name, role, status, current prompt and settings version.</td></tr>
+  <tr><td>actions, approvals</td><td>Every proposed action, its status in the approval flow, the decision and the execution permission.</td></tr>
+  <tr><td>audit_log</td><td>Permanent record of recommendations, approvals, executions, results and errors.</td></tr>
+  <tr><td>markets, market_settings</td><td>Markets and, for each, budget, test duration and Stop-Loss limit.</td></tr>
+  <tr><td>products, product_scores</td><td>Researched products, sources and dates, score per factor, estimate or proven label.</td></tr>
+  <tr><td>tests, test_results</td><td>Each controlled test: budget, duration, market, creatives, offer, criteria, outcome and classification.</td></tr>
+  <tr><td>creatives</td><td>Each image, hook, headline and copy variation with its performance.</td></tr>
+  <tr><td>orders_costs</td><td>Order revenue and each cost used in the net-profit formula.</td></tr>
+  <tr><td>rules, rule_versions</td><td>Business rules and scoring weights, with full version history.</td></tr>
+  <tr><td>prompt_versions</td><td>Every version of every agent prompt.</td></tr>
+  <tr><td>decisions, lessons</td><td>For each agent: action, reason, data used, result, what worked, what failed, what to change.</td></tr>
+  <tr><td>notifications</td><td>Alerts sent and their delivery status.</td></tr>
+  <tr><td>conversations, messages</td><td>Chat and voice history shared across devices (Milestone 6).</td></tr>
+</table>
+
+<h3>4.6 Business rules, version history and the STOP switch</h3>
+<ul>
+  <li><b>Business rules are settings, not code.</b> Minimum profit and margin, price range, maximum shipping time, target countries, supplier requirements, saturation limits, refund and complaint thresholds, advertising thresholds, scaling rules and Stop-Loss rules are edited in the dashboard.</li>
+  <li><b>Version history.</b> Every change to a prompt, scoring rule, business rule or agent setting creates a new version. A previous version can be restored from the dashboard. n8n workflows are exported to your repository at every milestone, which gives them version history too.</li>
+  <li><b>Global STOP.</b> One control in the dashboard stops all automated actions: publishing, Meta and TikTok actions, budget changes, scaling, refunds, customer-service actions, orders and all workflows. While it is on, even approved actions do not execute.</li>
+</ul>
+
+<h3>4.7 Security</h3>
+<ul>
+  <li>No password or API key is written in the code. Secrets are held in a protected configuration file on your server and in n8n's encrypted credential store.</li>
+  <li>The dashboard is reached only over HTTPS, with login required, hashed passwords and separate roles for owner and developer.</li>
+  <li>The firewall allows only web traffic and key-based server access. The database is not reachable from the internet.</li>
+  <li>Spending and publishing are protected twice: by the approval gate (4.3) and by the limits you set per market and per test.</li>
+  <li>Every login, approval and execution is logged.</li>
+</ul>
+
+<h3>4.8 Backups and export</h3>
+<table>
+  <tr><th style="width:26%">Item</th><th>Plan</th></tr>
+  <tr><td>Frequency</td><td>Database backup every night. Workflow and configuration export at every milestone and after every approved change.</td></tr>
+  <tr><td>Location</td><td>On the server, plus an off-server copy. Option: Hetzner's server backup add-on, about 20% of the server price, subject to your approval.</td></tr>
+  <tr><td>Retention</td><td>14 daily backups and 8 weekly backups.</td></tr>
+  <tr><td>Restore</td><td>Written step-by-step procedure, tested once before final handover.</td></tr>
+  <tr><td>Export</td><td>Database, agent history, audit log, workflows, configuration, prompts and performance history can be exported from Milestone 6.</td></tr>
+</table>
+
+<h3>4.9 Error handling and duplicate protection</h3>
+<ul>
+  <li>Calls to Shopify, Meta, TikTok, the supplier and the AI service are retried with increasing delays, respect each service's rate limits, and stop after a time limit.</li>
+  <li>Failed actions are logged, shown in the dashboard and sent as alerts. A failure never causes an unapproved action.</li>
+  <li>Each approved action carries a unique reference and executes once only. Products, campaigns and supplier orders are checked against existing records before creation, so the same item is not created twice.</li>
+  <li>If an external service is down, the action waits in a queue and is retried, or is returned to you as failed.</li>
+</ul>
+
+<h3>4.10 Product research data sources</h3>
+<p>The system uses official interfaces and publicly available data only. It does not collect data behind logins, does not break a site's terms, and collects no personal data other than your own store's customer records.</p>
+<table>
+  <tr><th style="width:24%">Source</th><th style="width:36%">How it is accessed</th><th>Limits</th></tr>
+  <tr><td>Your Shopify history</td><td>Shopify Admin API</td><td>None. It is your own data.</td></tr>
+  <tr><td>Supplier catalogue</td><td>Supplier API (see Part 9)</td><td>Limited to what the supplier publishes.</td></tr>
+  <tr><td>Google Trends</td><td>Public trend data</td><td>No official public interface. A paid data service may be needed for automation, at your approval.</td></tr>
+  <tr><td>Meta Ad Library</td><td>Official interface where available, otherwise the public website</td><td>The official interface mainly covers ads shown in the EU. Other countries can be viewed but not fully automated.</td></tr>
+  <tr><td>TikTok Creative Center</td><td>Public website</td><td>No public interface. Reviewed manually or with a paid tool, at your approval.</td></tr>
+  <tr><td>Competitor stores</td><td>Public pages and public product feeds</td><td>Only what each store shows publicly.</td></tr>
+  <tr><td>Amazon</td><td>Official product interface</td><td>Requires an Amazon Associates account that meets Amazon's conditions. Otherwise a paid data service.</td></tr>
+  <tr><td>SHEIN, Temu</td><td>Public pages or a paid data service</td><td>Neither offers a public product interface. Coverage depends on the service chosen.</td></tr>
+  <tr><td>AliExpress</td><td>Official affiliate interface</td><td>Requires AliExpress approval.</td></tr>
+</table>
+<p class="note">IP-risk screening checks brand names, logos and known trademarks and removes or flags matches. It reduces risk. It is not legal clearance, so your approval remains the final check.</p>
+
+<h3>4.11 Product scoring formula</h3>
+<p>Each factor is scored from 0 to 100, multiplied by its weight, and the results are added to give a final score from 0 to 100. The weights below are the proposed starting values. They are visible and editable in the dashboard.</p>
+<table>
+  <tr><th>Factor</th><th style="width:12%">Weight</th><th>Factor</th><th style="width:12%">Weight</th></tr>
+  <tr><td>Profit and margin (cost, shipping cost, selling price)</td><td>20</td><td>Supplier quality and reviews</td><td>10</td></tr>
+  <tr><td>Demand and trend strength</td><td>15</td><td>Refund and return risk, including sizing</td><td>10</td></tr>
+  <tr><td>Competition and saturation</td><td>10</td><td>Product reviews</td><td>5</td></tr>
+  <tr><td>Advertising potential</td><td>10</td><td>Complaint history</td><td>5</td></tr>
+  <tr><td>Shipping time</td><td>10</td><td>Historical performance in your store</td><td>5</td></tr>
+</table>
+<p>Before scoring, a product is rejected outright if it fails a hard rule: IP-risk flag, below minimum margin, above maximum shipping time, outside your price range, or not available for your target markets. Every score shows its factor breakdown, its data sources with dates, and whether it is an estimate or proven by a test. An untested product is never labelled a winner.</p>
+
+<h3>4.12 Net profit formula</h3>
+<div class="box">Estimated net profit = Revenue &minus; product cost &minus; supplier shipping &minus; advertising spend &minus; payment processing fees &minus; Shopify and app fees where attributable &minus; discounts &minus; refunds and cancellations &minus; other agreed variable costs</div>
+<table>
+  <tr><th style="width:32%">Cost or value</th><th>Data source</th></tr>
+  <tr><td>Revenue, discounts, refunds, cancellations</td><td>Shopify orders (confirmed values)</td></tr>
+  <tr><td>Product cost and supplier shipping</td><td>Supplier order data once the supplier is connected in Milestone 5. Until then, the cost recorded per product.</td></tr>
+  <tr><td>Advertising spend</td><td>Meta and TikTok reporting</td></tr>
+  <tr><td>Payment processing fees</td><td>Your PayPlus and PayPal rates, entered as settings. Shown as estimates.</td></tr>
+  <tr><td>Shopify and app fees</td><td>Your plan rates, entered as settings. Shown as estimates.</td></tr>
+  <tr><td>Other variable costs</td><td>Settings you define.</td></tr>
+</table>
+<p>Profit is calculated per order, product, campaign and market. Each figure is labelled confirmed or estimate. Scaling recommendations use profit, not ROAS alone.</p>
+
+<h3>4.13 Continuous learning and its safety rules</h3>
+<p class="flow">ACTION &rarr; RESULT &rarr; ANALYSIS &rarr; LEARNING &rarr; IMPROVED NEXT DECISION</p>
+<p>Every agent stores what it did, why, the data used, the result, whether it succeeded, what was learned and what should change. These records adjust product scores, creative choices, test recommendations, CRO recommendations and scaling advice. Agents can propose changes to prompts, scoring weights and rules. They cannot change code or infrastructure.</p>
+<table>
+  <tr><th style="width:32%">Safety rule</th><th>Proposed starting value (editable)</th></tr>
+  <tr><td>Minimum data before a weight changes</td><td>10 completed product tests, or 50 orders, relevant to that factor</td></tr>
+  <tr><td>Maximum change at one time</td><td>5 points per weight, at most once a week</td></tr>
+  <tr><td>Approval</td><td>Every proposed change to a weight, rule or prompt needs your approval</td></tr>
+  <tr><td>How a change is evaluated</td><td>Results of the next 10 tests compared with the previous 10. Controlled comparison where possible; otherwise labelled as a before-and-after observation.</td></tr>
+  <tr><td>Detecting a poor change</td><td>If results are worse after the change, the system flags it and recommends restoring the previous version</td></tr>
+  <tr><td>Return to a previous configuration</td><td>One action in the dashboard restores any earlier version (4.6)</td></tr>
+  <tr><td>Insufficient evidence</td><td>Reported as "not enough data" with no recommendation forced</td></tr>
+</table>
+
+<h2><span class="num">5</span>The six milestones and how each is accepted</h2>
+<p>For every milestone: you pay, I deliver into your accounts, we test together against the written test below, I correct and retest any defect, and you approve before the next offer is sent. Documentation in your repository is updated at every delivery.</p>
+<div class="timeline">
+  <div class="seg" style="flex:11"><b>1</b><span>Foundation<br>11 days</span></div>
+  <div class="seg" style="flex:13"><b>2</b><span>Products &amp; creative<br>13 days</span></div>
+  <div class="seg" style="flex:12"><b>3</b><span>Analytics &amp; CEO<br>12 days</span></div>
+  <div class="seg" style="flex:12"><b>4</b><span>Ads &amp; testing<br>12 days</span></div>
+  <div class="seg" style="flex:21"><b>5</b><span>CRO, supplier, orders<br>21 days</span></div>
+  <div class="seg" style="flex:34"><b>6</b><span>Chat, voice, learning, handover<br>34 days</span></div>
+</div>
+<p class="tl-note">Width of each block shows its share of the 103 days.</p>
+<table>
+  <tr><th style="width:4%">#</th><th style="width:20%">Milestone</th><th>What is delivered</th><th style="width:27%">Acceptance test</th><th style="width:7%">Days</th></tr>
+  <tr><td>1</td><td>Discovery &amp; Foundation</td><td>This plan. Repository, VPS, PostgreSQL and n8n in your accounts. Dashboard with login, approval queue, activity log, notifications and market selection (one, several or switchable; budget, duration and Stop-Loss per market). Nightly database backup.</td><td>You approve this plan in writing. Live: a test action moves through the approval flow into the activity log, a rejected action does not execute, and market settings are saved and switched.</td><td>11</td></tr>
+  <tr><td>2</td><td>Research, Scoring, Shopify &amp; Creative</td><td>Nova, Sage, Atlas, Muse. Business-rule settings and scoring weights in the dashboard, version history, global STOP, error log.</td><td>Live: a researched product is scored with its breakdown, approved by you, and appears in Shopify as a draft with creatives. With STOP on, nothing executes.</td><td>13</td></tr>
+  <tr><td>3</td><td>Analytics, Net Profit, CEO &amp; Customer Service</td><td>Ada, Leo, James, Cora. Funnel tracking, net profit, cross-market comparison, Scaling Playbook, daily and weekly CEO report, customer-service feedback into scoring.</td><td>Live on real store and ad data: report figures match the source numbers, and a refund request goes to your approval queue.</td><td>12</td></tr>
+  <tr><td>4</td><td>Meta &amp; TikTok Ads, Testing Loop, Stop-Loss</td><td>Max, Tia. Testing Loop with Kill, Retest, Improve, Scale and explanations. Product Testing view, experiment list, Stop-Loss.</td><td>Live: a test campaign is prepared paused, approved, run within limits, classified, and paused by Stop-Loss with an alert and logged reason.</td><td>12</td></tr>
+  <tr><td>5</td><td>CRO, Supplier Monitoring, Order &amp; Shipping</td><td>Remy, Sam, Oscar as first versions with one supplier and one fulfillment service.</td><td>Live demo of each agent, including a weak funnel step producing a recommendation, a supplier change producing an alert, and one test order submitted once only.</td><td>21</td></tr>
+  <tr><td>6</td><td>Chat &amp; Voice, Learning, Security, Handover</td><td>Text and voice chat with all agents in Hebrew and English on iPhone and computer. Finn, Creative Learning Loop, exports, security review, full end-to-end test, final documentation, handover. Support period starts.</td><td>A voice conversation with James and an approved task, in both languages, on both devices. The full end-to-end test passes, including proof that approval cannot be bypassed.</td><td>34</td></tr>
+</table>
+<p><b>Total: 103 days and $3,600.</b> Milestones 4 and 5 depend on approvals by Meta, TikTok and the chosen supplier. Waiting time for those approvals is outside my control and does not count as delivery time.</p>
+
+<h3>Milestone 1 timing</h3>
+<p>Milestone 1 is due 11 days from the order date. Deployment into your accounts needs the GitHub repository and the VPS from Part 1. If they are created later than five days before the due date, we agree a short extension on Fiverr.</p>
+
+<h2 class="pb"><span class="num">6</span>Requirements register</h2>
+<p>Every agreed requirement, where it came from, the milestone that delivers it and how it is tested. Sources: <b>B</b> = your six-part brief, <b>R</b> = Project Requirements Before Milestone 1, <b>A</b> = Additional Requirements Before Development, <b>G</b> = Profitable Sales Growth Requirements, <b>M</b> = Fiverr messages and the accepted offer.</p>
+<table class="long">
+  <tr><th style="width:5%">ID</th><th style="width:36%">Requirement</th><th style="width:9%">Source</th><th style="width:10%">Milestone</th><th>Acceptance test or note</th></tr>
+
+  <tr class="grp"><td colspan="5">Ownership and handover</td></tr>
+  <tr><td>1</td><td>All accounts created under your ownership, with administrator access from the start</td><td>B, R1</td><td>1, then all</td><td>Every account in Part 1 is in your name and you are administrator.</td></tr>
+  <tr><td>2</td><td>Exclusive ownership of custom code; no resale, sharing or reuse</td><td>M</td><td>All</td><td>Confirmed in Part 2.</td></tr>
+  <tr><td>3</td><td>Another developer can read, modify, continue and move the system</td><td>R2, R23</td><td>All</td><td>Setup guide in the repository lets a new developer run the system on a new server.</td></tr>
+  <tr><td>4</td><td>Documentation updated after every milestone</td><td>R2</td><td>All</td><td>Repository documentation updated at each delivery.</td></tr>
+  <tr><td>5</td><td>No dependency on developer accounts, servers or keys</td><td>R1, A13</td><td>All</td><td>Verified in the Milestone 6 handover check.</td></tr>
+  <tr><td>6</td><td>Third-party components and licences identified before development</td><td>M</td><td>1</td><td>Part 7.</td></tr>
+  <tr><td>7</td><td>Modular: agents added or replaced without breaking others</td><td>R20, M</td><td>1 design, 2 proof</td><td>In the Milestone 2 demo one agent is switched off and the others keep working.</td></tr>
+  <tr><td>8</td><td>Work already paid for remains yours if you stop after a milestone</td><td>R22</td><td>All</td><td>All work is delivered into your accounts at each milestone.</td></tr>
+
+  <tr class="grp"><td colspan="5">Approval, control and safety</td></tr>
+  <tr><td>9</td><td>Nothing published, launched, changed or spent without approval</td><td>B4, R10</td><td>1, then all</td><td>An action without an approval record is refused, shown live.</td></tr>
+  <tr><td>10</td><td>Visible status flow from Recommended to Result</td><td>R10</td><td>1</td><td>Each action shows its status and history.</td></tr>
+  <tr><td>11</td><td>Complete audit history of recommendations, approvals and executions</td><td>B4, A8</td><td>1</td><td>Activity log shows all three for the test action.</td></tr>
+  <tr><td>12</td><td>Global emergency STOP</td><td>R9</td><td>2</td><td>With STOP on, an approved action does not execute.</td></tr>
+  <tr><td>13</td><td>All Meta and TikTok campaigns created paused</td><td>B4</td><td>4</td><td>Test campaign appears paused in the ad account.</td></tr>
+  <tr><td>14</td><td>Stop-Loss pauses automatically only inside pre-approved limits, with alert and logged reason; restarts and increases need approval</td><td>A1, M</td><td>4</td><td>Test passes its limit, is paused, alert received, reason logged.</td></tr>
+  <tr><td>15</td><td>Customer-service refunds, cancellations and store credit need approval</td><td>B2, B4</td><td>3</td><td>A refund request appears in the approval queue.</td></tr>
+  <tr><td>16</td><td>Agents never rewrite production code or change infrastructure</td><td>B3, A10</td><td>All</td><td>Agents can only propose versioned prompt, weight and rule changes.</td></tr>
+  <tr><td>17</td><td>Architecture allows optional limited automation later, inside strict guardrails</td><td>A10</td><td>1 design</td><td>At launch only Stop-Loss pausing is automatic. Other automation needs a later written agreement.</td></tr>
+  <tr><td>18</td><td>Protection against executing the same approved action twice</td><td>R11</td><td>1</td><td>Repeating an executed action is refused.</td></tr>
+
+  <tr class="grp"><td colspan="5">Dashboard</td></tr>
+  <tr><td>19</td><td>Login, approval queue, activity log, notifications</td><td>M</td><td>1</td><td>Shown in the Milestone 1 demo.</td></tr>
+  <tr><td>20</td><td>Market selection: one, several or switchable, with budget, duration and Stop-Loss per market</td><td>M</td><td>1</td><td>Settings saved for two markets and switched.</td></tr>
+  <tr><td>21</td><td>Research results, scores, product approval, Shopify drafts, creative approval</td><td>B4</td><td>2</td><td>Shown in the Milestone 2 demo.</td></tr>
+  <tr><td>22</td><td>Business rules editable without changing code</td><td>R5</td><td>2, extended each milestone</td><td>A rule is changed in the dashboard and the next score reflects it.</td></tr>
+  <tr><td>23</td><td>Version history and restore for prompts, scoring rules, agent settings, business rules and workflows</td><td>R8</td><td>2</td><td>A previous version is restored from the dashboard.</td></tr>
+  <tr><td>24</td><td>Error log; failed actions visible</td><td>B5</td><td>2</td><td>A forced failure appears in the error log.</td></tr>
+  <tr><td>25</td><td>Sales dashboard: revenue, orders, ad spend, acquisition cost, conversion rate, order value, profit, refund rate, by product, campaign and market, with sources and estimate labels</td><td>B4, G10</td><td>3</td><td>Figures match Shopify and ad-platform numbers.</td></tr>
+  <tr><td>26</td><td>Campaign and budget-change approval; Product Testing view; winner and loser overview</td><td>B4, A9</td><td>4</td><td>Shown in the Milestone 4 demo.</td></tr>
+  <tr><td>27</td><td>Agent activity and performance views</td><td>B4</td><td>Activity 2, scorecards 6</td><td>Scorecards appear in the CEO report.</td></tr>
+  <tr><td>28</td><td>Installable web app on iPhone and computer, same account and history</td><td>M</td><td>6</td><td>Shown on both devices.</td></tr>
+
+  <tr class="grp"><td colspan="5">Agents and functions</td></tr>
+  <tr><td>29</td><td>Product research from the agreed sources, including international fashion sites, with IP-risk screening</td><td>B1, M</td><td>2</td><td>Research run returns products with sources; flagged items are removed or sent for review.</td></tr>
+  <tr><td>30</td><td>Research data sources defined, with what can legally and technically be collected</td><td>R3</td><td>1</td><td>Part 4.10.</td></tr>
+  <tr><td>31</td><td>Visible, configurable scoring formula and weights</td><td>R3, R4</td><td>1 formula, 2 working</td><td>Part 4.11; breakdown shown per product.</td></tr>
+  <tr><td>32</td><td>Evidence-based assessment; estimates kept separate from proven results</td><td>G2, M</td><td>2</td><td>Each product shows sources, dates and an estimate or proven label.</td></tr>
+  <tr><td>33</td><td>Market assessment and ranking per product</td><td>M</td><td>1 comparison, 2 in system</td><td>Part 8; ranking shown per product.</td></tr>
+  <tr><td>34</td><td>Shopify draft products: titles, descriptions, SEO, images, variants, pricing, tags, collections</td><td>B1</td><td>2</td><td>Approved product appears as a draft.</td></tr>
+  <tr><td>35</td><td>Creative deliverables: ad images, hooks, headlines, copy, video scripts, UGC concepts, variations</td><td>B1, M</td><td>2</td><td>Variations appear for approval. Filmed video and generation credits are not included.</td></tr>
+  <tr><td>36</td><td>Analysis of public competitor advertising information</td><td>B3</td><td>2</td><td>Within the limits in 4.10.</td></tr>
+  <tr><td>37</td><td>Analytics: ROAS, CPA, CTR, CPC, CPM, conversion rate, order value, revenue, net profit</td><td>B1</td><td>3</td><td>Figures match source data.</td></tr>
+  <tr><td>38</td><td>True net profit with documented formula and data source per cost</td><td>R16, A6</td><td>1 formula, 3 working</td><td>Part 4.12; profit shown per product and campaign.</td></tr>
+  <tr><td>39</td><td>Funnel tracking from impression to purchase; bottleneck identification</td><td>A1, G3, G8</td><td>3</td><td>A weak funnel step is identified from sample or live data. Limited to what Shopify, Meta and TikTok report.</td></tr>
+  <tr><td>40</td><td>Cross-market comparison of sales, conversion, acquisition cost and net profit</td><td>M</td><td>3</td><td>Two markets compared side by side.</td></tr>
+  <tr><td>41</td><td>Winner Scaling Playbook with risk controls; recommendations based on profit</td><td>A7, G9</td><td>3</td><td>A scaling recommendation cannot exceed set limits or run without approval.</td></tr>
+  <tr><td>42</td><td>CEO daily report and weekly report, with ranked actions, evidence and confidence</td><td>B2, R15, G11</td><td>3</td><td>Both reports received with all agreed sections.</td></tr>
+  <tr><td>43</td><td>Customer service: answer questions, check orders and tracking, store history, escalate</td><td>B2</td><td>3</td><td>Test inquiries answered correctly. Channel is agreed at the start of Milestone 3.</td></tr>
+  <tr><td>44</td><td>Customer-service data lowers the score of problem products</td><td>B2, R17</td><td>3</td><td>Complaint data reduces a product's score.</td></tr>
+  <tr><td>45</td><td>Meta campaigns, ad sets and ads through the Meta interface</td><td>B1</td><td>4</td><td>Subject to Meta's approval of the connection.</td></tr>
+  <tr><td>46</td><td>TikTok campaigns, ad groups and ads through the TikTok interface</td><td>B1</td><td>4</td><td>Subject to TikTok account setup and approval.</td></tr>
+  <tr><td>47</td><td>Testing Loop: each test stores budget, duration, market, creatives, offer, audience and criteria; classified Kill, Retest, Improve or Scale with reasons</td><td>A1, M</td><td>4</td><td>A test produces a traceable classification.</td></tr>
+  <tr><td>48</td><td>Prioritised experiment list with hypothesis, metric, result and lesson</td><td>G7</td><td>4, extended 5</td><td>Experiments recorded and listed.</td></tr>
+  <tr><td>49</td><td>Start with one market and one channel, then expand</td><td>G3, M</td><td>4</td><td>Meta first, in the market you choose.</td></tr>
+  <tr><td>50</td><td>CRO first version: drop-offs by product, market and device; recommendations; page copy drafts and A/B test plans; changes need approval</td><td>A3, G4, M</td><td>5</td><td>A weak step produces a concrete recommendation.</td></tr>
+  <tr><td>51</td><td>Order-value recommendations: bundles, quantity offers, shipping thresholds, judged on profit</td><td>G5</td><td>5</td><td>Recommendations only; changes need approval.</td></tr>
+  <tr><td>52</td><td>Supplier Monitoring first version: daily stock, price and shipping checks for one supplier; alerts; margin and delivery flags</td><td>A5, M</td><td>5</td><td>A supplier change creates a visible alert. Features depend on the supplier's integration.</td></tr>
+  <tr><td>53</td><td>Order &amp; Shipping first version: orders submitted inside approved limits to one fulfillment service; tracking sync; alerts; duplicate prevention</td><td>M</td><td>5</td><td>One test order is submitted once only and its tracking is synced.</td></tr>
+  <tr><td>54</td><td>Supplier and fulfillment comparison with recommendation</td><td>M</td><td>1</td><td>Part 9.</td></tr>
+
+  <tr class="grp"><td colspan="5">Learning</td></tr>
+  <tr><td>55</td><td>Every agent stores action, reason, data, result, lesson and next change</td><td>B3, R6, A8</td><td>From 2, per agent</td><td>Records visible for each agent as it is delivered.</td></tr>
+  <tr><td>56</td><td>Learning safety rules defined</td><td>R7</td><td>1 defined, 6 working</td><td>Part 4.13.</td></tr>
+  <tr><td>57</td><td>Creative Learning Loop: winning elements shape the next variations; fatigue detection</td><td>A2, M</td><td>6</td><td>Performance of several creatives changes the next recommendations.</td></tr>
+  <tr><td>58</td><td>Learning Supervisor scorecard per agent; weak agents flagged</td><td>B2, R14, A8</td><td>6</td><td>Scorecards appear in the CEO report.</td></tr>
+  <tr><td>59</td><td>Previous results influence the next recommendation</td><td>G12</td><td>6</td><td>Shown in the end-to-end test.</td></tr>
+
+  <tr class="grp"><td colspan="5">Chat and voice</td></tr>
+  <tr><td>60</td><td>Text chat with James and each agent, Hebrew and English</td><td>M</td><td>6</td><td>Shown on both devices.</td></tr>
+  <tr><td>61</td><td>Tap-to-record voice input and spoken replies, Hebrew and English, iPhone and computer</td><td>M</td><td>6</td><td>Voice conversation with James in both languages on both devices. On iPhone the reply plays after a tap.</td></tr>
+  <tr><td>62</td><td>Addressing an agent by name routes the message to it; James answers by default</td><td>M</td><td>6</td><td>Named requests reach the named agent.</td></tr>
+  <tr><td>63</td><td>Answers from real system data; requested tasks follow the approval process</td><td>M</td><td>6</td><td>A spoken task appears in the approval queue.</td></tr>
+
+  <tr class="grp"><td colspan="5">Technical</td></tr>
+  <tr><td>64</td><td>Security: secrets, authentication, permissions, database, firewall, logging</td><td>B5, R12</td><td>1 basics, 6 review</td><td>Part 4.7; security review before handover.</td></tr>
+  <tr><td>65</td><td>Retries, rate limits, timeouts, failure handling, alerts, safe recovery</td><td>B5, R11</td><td>From 2</td><td>Part 4.9; a forced failure is handled safely.</td></tr>
+  <tr><td>66</td><td>Duplicate product, campaign and order prevention</td><td>R11</td><td>2, 4, 5</td><td>A repeated request does not create a second item.</td></tr>
+  <tr><td>67</td><td>Automatic backups with defined frequency, location, retention and restore</td><td>B5, R13</td><td>1 nightly, 6 restore test</td><td>Part 4.8.</td></tr>
+  <tr><td>68</td><td>Export of database, history, logs, workflows, configuration and prompts</td><td>R13</td><td>6</td><td>Export files produced.</td></tr>
+  <tr><td>69</td><td>Full end-to-end test, including proof that approval cannot be bypassed</td><td>R18, A11, A12</td><td>6</td><td>One product goes from research to CEO report; an unapproved action is refused.</td></tr>
+  <tr><td>70</td><td>Final documentation: diagrams, agent responsibilities, API list, installation, deployment, backup, troubleshooting, adding an agent, changing rules and prompts, moving server, developer takeover</td><td>R19</td><td>6</td><td>Delivered in your repository.</td></tr>
+  <tr><td>71</td><td>Three months of support for bug fixes and integration issues</td><td>M</td><td>After 6</td><td>Starts when you approve Milestone 6.</td></tr>
+  <tr><td>72</td><td>Examples of previous relevant work before Milestone 2 is approved</td><td>R21</td><td>Before 2</td><td>Sent separately by me.</td></tr>
+
+  <tr class="grp"><td colspan="5">Not included, or future phase</td></tr>
+  <tr><td>73</td><td>Email and SMS retention flows (welcome, abandoned cart, post-purchase, win-back)</td><td>A4, G6</td><td>Future phase</td><td>Not in the $3,600. The architecture allows it to be added. Quoted on request.</td></tr>
+  <tr><td>74</td><td>Further agents such as SEO, Finance, Legal/Tax, QA, organic social</td><td>R20</td><td>Future phase</td><td>The architecture allows them to be added.</td></tr>
+  <tr><td>75</td><td>Additional suppliers or fulfillment services beyond one of each</td><td>M</td><td>Future phase</td><td>Quoted separately.</td></tr>
+  <tr><td>76</td><td>Hands-free continuous voice conversation; native App Store app</td><td>M</td><td>Future phase</td><td>Quoted separately.</td></tr>
+  <tr><td>77</td><td>Guaranteed sales or profit</td><td>G12</td><td>Not possible</td><td>The system demonstrates a working process for measuring and improving them.</td></tr>
+</table>
+
+<h2 class="pb"><span class="num">7</span>Third-party components, licences and recurring costs</h2>
+<p>No private or pre-existing code of mine is used. The system is built from the components below plus custom code written for you.</p>
+<table>
+  <tr><th style="width:22%">Component</th><th style="width:28%">Used for</th><th style="width:26%">Licence</th><th>Cost</th></tr>
+  <tr><td>Next.js, React</td><td>Dashboard and backend</td><td>MIT (open source)</td><td>Free</td></tr>
+  <tr><td>Node.js</td><td>Runs the dashboard</td><td>MIT (open source)</td><td>Free</td></tr>
+  <tr><td>PostgreSQL</td><td>Database</td><td>PostgreSQL Licence (open source)</td><td>Free</td></tr>
+  <tr><td>Prisma</td><td>Database access</td><td>Apache 2.0 (open source)</td><td>Free</td></tr>
+  <tr><td>Auth.js</td><td>Login</td><td>ISC (open source)</td><td>Free</td></tr>
+  <tr><td>Tailwind CSS</td><td>Dashboard styling</td><td>MIT (open source)</td><td>Free</td></tr>
+  <tr><td>n8n, self-hosted</td><td>Agent workflows</td><td>n8n Sustainable Use Licence. Free to self-host for your own business. It is not open source and may not be resold as a service.</td><td>Free</td></tr>
+  <tr><td>Docker, Caddy</td><td>Running the system; HTTPS</td><td>Apache 2.0 (open source)</td><td>Free</td></tr>
+  <tr><td>Ubuntu Linux</td><td>Server operating system</td><td>Open source</td><td>Free</td></tr>
+  <tr><td>Claude API</td><td>The agents' AI model</td><td>Commercial service, your account</td><td>Usage-based</td></tr>
+  <tr><td>Speech services</td><td>Voice input and spoken replies</td><td>Commercial service, your account. Chosen after Hebrew testing in Milestone 6.</td><td>Usage-based</td></tr>
+</table>
+<p>These components keep their own licences. Your exclusive ownership covers the custom code, workflows, prompts, configurations and data created for VALRTINO.</p>
+
+<h3>Estimated recurring costs, paid by you</h3>
+<table>
+  <tr><th style="width:34%">Item</th><th style="width:20%">From</th><th>Estimate per month</th></tr>
+  <tr><td>VPS (Hetzner CX23)</td><td>Milestone 1</td><td>About EUR 6 before tax. Optional backup add-on about 20% more.</td></tr>
+  <tr><td>GitHub, PostgreSQL, n8n, dashboard address</td><td>Milestone 1</td><td>Free</td></tr>
+  <tr><td>Claude API</td><td>Milestone 2</td><td>$20-60, depending on volume</td></tr>
+  <tr><td>Supplier or fulfillment service</td><td>Milestone 5</td><td>Depends on your choice. The recommended option has no subscription fee.</td></tr>
+  <tr><td>Voice services</td><td>Milestone 6</td><td>$20-50 for about 30 minutes of use a day</td></tr>
+  <tr><td>Paid research data services</td><td>Optional</td><td>Only if you approve one (see 4.10)</td></tr>
+  <tr><td>Advertising spend, image and video generation credits</td><td>Your decision</td><td>Not included in any estimate above</td></tr>
+</table>
+
+<h2 class="pb"><span class="num">8</span>Market comparison</h2>
+<div class="box">All figures are estimates from public sources, collected in October 2026. They describe each market in general, not VALRTINO's own results. The system's controlled tests will produce the proven numbers.</div>
+<table>
+  <tr><th style="width:15%">Market</th><th>Online fashion market, 2025</th><th>Meta ad cost per 1,000 views</th><th>Apparel return rate</th><th>Delivery from China with the recommended supplier</th></tr>
+  <tr><td>United States</td><td>$239.8 billion</td><td>about $23.00</td><td>about 31%</td><td>7-12 days</td></tr>
+  <tr><td>United Kingdom</td><td>$53.4 billion</td><td>about $10.30</td><td>about 24%</td><td>7-12 days</td></tr>
+  <tr><td>Canada</td><td>$16.6 billion</td><td>about $13.40</td><td>about 30%</td><td>15-25 days</td></tr>
+  <tr><td>Australia</td><td>$10.0 billion</td><td>about $18.50</td><td>about 31%</td><td>8-16 days</td></tr>
+  <tr><td>Singapore</td><td>$1.9 billion</td><td>about $12.00</td><td>not available</td><td>6-12 days</td></tr>
+  <tr><td>Ireland</td><td>$1.2 billion</td><td>about $7.40-12.00</td><td>not available</td><td>not available</td></tr>
+  <tr><td>South Africa</td><td>$1.1 billion, fastest growth</td><td>about $2.50</td><td>not available</td><td>not available</td></tr>
+  <tr><td>New Zealand</td><td>$0.9 billion</td><td>about $11.20</td><td>about 27%</td><td>not available</td></tr>
+</table>
+<div class="chart"><div class="ttl">Meta ad cost per 1,000 views, highest to lowest (estimates)</div>
+  <div class="bar"><span class="lb">United States</span><span class="tr"><div class="fl" style="width:100%"></div></span><span class="vl">about $23.00</span></div>
+  <div class="bar"><span class="lb">Australia</span><span class="tr"><div class="fl" style="width:80%"></div></span><span class="vl">about $18.50</span></div>
+  <div class="bar"><span class="lb">Canada</span><span class="tr"><div class="fl" style="width:58%"></div></span><span class="vl">about $13.40</span></div>
+  <div class="bar"><span class="lb">Singapore</span><span class="tr"><div class="fl" style="width:52%"></div></span><span class="vl">about $12.00</span></div>
+  <div class="bar"><span class="lb">New Zealand</span><span class="tr"><div class="fl" style="width:49%"></div></span><span class="vl">about $11.20</span></div>
+  <div class="bar"><span class="lb">United Kingdom</span><span class="tr"><div class="fl" style="width:45%"></div></span><span class="vl">about $10.30</span></div>
+  <div class="bar"><span class="lb">Ireland</span><span class="tr"><div class="fl" style="width:42%"></div></span><span class="vl">about $7.40-12.00</span></div>
+  <div class="bar"><span class="lb">South Africa</span><span class="tr"><div class="fl" style="width:11%"></div></span><span class="vl">about $2.50</span></div>
+</div>
+<p class="note">Market size is used as the measure of demand. Advertising cost is used as the measure of competition for attention, since more advertisers bidding raises the cost. Expected profitability cannot be stated honestly before tests, because it depends on your product prices, costs and conversion in each market.</p>
+
+<h3>Reading the comparison</h3>
+<ul>
+  <li><b>United Kingdom:</b> large market, the lowest ad cost among the large markets, the lowest return rate found, and fast delivery.</li>
+  <li><b>Australia:</b> mid-sized market with good delivery times. Ad cost and return rate are both high. Your store's public page currently shows Australia-wide free shipping.</li>
+  <li><b>United States:</b> by far the largest market, with the highest ad cost and return rate.</li>
+  <li><b>Canada:</b> good size, but the slowest delivery of the eight.</li>
+  <li><b>Singapore, Ireland, New Zealand:</b> small markets. Useful as later additions once a product is proven.</li>
+  <li><b>South Africa:</b> very low ad cost and fast growth, but lower spending power against your $60-480 price range, and no delivery data found.</li>
+</ul>
+
+<h3>Recommendation</h3>
+<div class="recs">
+  <div class="rec"><i>Start</i><b>Australia</b>If your current store setup and orders are there, because shipping, pricing and returns are already in place.</div>
+  <div class="rec"><i>Second</i><b>United Kingdom</b>The strongest market on ad cost and returns, with fast delivery.</div>
+  <div class="rec"><i>Third</i><b>United States</b>Once a product is proven and budgets can support its ad costs.</div>
+  <div class="rec"><i>Hold</i><b>The other five</b>Until there are proven products to expand with.</div>
+</div>
+<p>I will confirm this against your real order data once Shopify access is given. The final choice is yours, and the system supports one market, several at once, and switching later, each with its own budget, test duration and Stop-Loss limit.</p>
+<p class="note">Tax note: selling into a country can create registration duties, for example VAT in the United Kingdom and the EU, and GST in Australia above a turnover threshold. Please confirm these with your accountant before a market is opened. This document does not give tax advice.</p>
+
+<h2><span class="num">9</span>Supplier and fulfillment comparison</h2>
+<table>
+  <tr><th style="width:22%"></th><th>CJ Dropshipping</th><th>AliExpress through DSers</th><th>Zendrop</th></tr>
+  <tr><td>Recurring fee</td><td>None. You pay product and shipping per order.</td><td>Free plan available; paid plans exist.</td><td>$49-79 per month, or usage-based $29-79 on Shopify.</td></tr>
+  <tr><td>Shopify compatibility</td><td>Official app, free to install.</td><td>Official AliExpress partner app.</td><td>Official app.</td></tr>
+  <tr><td>Interface our agents can use</td><td>Yes. Documented public interface.</td><td>Order interface needs AliExpress approval and is restricted. DSers works inside its own app.</td><td>No public interface.</td></tr>
+  <tr><td>Stock and price monitoring</td><td>Supported.</td><td>Inside the DSers app only.</td><td>Inside the Zendrop app only.</td></tr>
+  <tr><td>Shipping information</td><td>Supported, including cost calculation.</td><td>Inside the app.</td><td>Inside the app.</td></tr>
+  <tr><td>Order submission</td><td>Supported, with a test mode that creates no real charge.</td><td>Inside the app.</td><td>Inside the app.</td></tr>
+  <tr><td>Tracking and status updates</td><td>Supported, with automatic notifications.</td><td>Synced by the app.</td><td>Synced by the app.</td></tr>
+  <tr><td>Duplicate-order prevention</td><td>Built on our side, using your Shopify order number as the reference on each order.</td><td>Cannot be controlled by our system.</td><td>Cannot be controlled by our system.</td></tr>
+  <tr><td>Delivery times</td><td>About 7-12 days to the US and UK, 8-16 to Australia, 15-25 to Canada. Some stock in US warehouses.</td><td>Varies by seller.</td><td>About 5-8 days from its US warehouse; mainly US-focused.</td></tr>
+  <tr><td>Product quality and returns</td><td>Varies by product. Needs sample orders.</td><td>Varies by seller.</td><td>Varies by product.</td></tr>
+</table>
+
+<h3>Recommendation: CJ Dropshipping</h3>
+<p>It is the only one of the three with a documented public interface covering every agreed function for Sam (Supplier Monitoring) and Oscar (Order &amp; Shipping), and it has no subscription fee. With the other two, the work would happen inside their own apps, where our agents and your approval limits cannot control it.</p>
+<p><b>Limitations to know:</b></p>
+<ul>
+  <li>Product quality and real delivery times can only be confirmed by sample orders, at your cost. Without them, the comparison relies on published data.</li>
+  <li>CJ limits how often its interface can be called. Daily checks are well within normal limits; exact limits will be confirmed when your account exists.</li>
+  <li>CJ's return and dispute terms apply per order and should be reviewed before the first live order.</li>
+  <li>Automated orders are paid from a balance in your CJ account, so the spending limit you approve is also capped by the balance you choose to keep there.</li>
+</ul>
+<p>No supplier account is needed until Milestone 5, and no subscription is started without your approval.</p>
+
+<h2><span class="num">10</span>Not included, limitations and approval</h2>
+<h3>Not included in the $3,600</h3>
+<ul>
+  <li>Advertising spend, paid research or data services, image and video generation credits, filmed video.</li>
+  <li>Email and SMS retention flows, further agents, extra supplier or fulfillment integrations, hands-free voice, a native App Store app.</li>
+  <li>Sample orders, and any fees charged by the VPS, AI, voice, supplier or advertising platforms.</li>
+</ul>
+<h3>Limitations</h3>
+<ul>
+  <li>Meta, TikTok and supplier connections depend on those platforms' approval and on what their interfaces allow.</li>
+  <li>Research coverage depends on the sources in 4.10.</li>
+  <li>IP-risk screening reduces risk and is not legal clearance.</li>
+  <li>Hebrew voice quality depends on the speech service and is tested before one is chosen.</li>
+  <li>The system measures and improves sales and profit. It cannot guarantee them.</li>
+</ul>
+<h3>Changes</h3>
+<p>Any requirement not listed in Part 6 is a new requirement. It is quoted separately and needs your written approval before work starts.</p>
+
+<div class="box">
+  <b>Approval.</b> To approve this plan, please reply in writing with:
+  <ol>
+    <li>"I approve the Milestone 1 plan", or the list of changes you want.</li>
+    <li>Your starting market or markets.</li>
+    <li>Your supplier choice.</li>
+    <li>Your alert preference: email or Telegram.</li>
+  </ol>
+</div>
+
+</body>
+</html>
